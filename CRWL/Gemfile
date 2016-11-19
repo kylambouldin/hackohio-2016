@@ -18,6 +18,7 @@ gem 'coffee-rails', '~> 4.2'
 gem 'devise'
 gem 'bootstrap-sass'
 gem 'pg'
+gem 'jquery-turbolinks'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
