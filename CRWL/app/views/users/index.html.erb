@@ -34,11 +34,15 @@
   </head>
 
   <body>
-
+		<% if user_signed_in? %>
+			<h1>USER LOGGED IN</h1>
+		<% else %>
+		
 	<div class="loginpic" style=background-image:url('../../../assets/frontpage-tinted.png');>
 	</div>
 
 	<div class="jumbotron">
+		
 		<div class="container">
 		<h1>Welcome!</h1>
 		<p>Register to get started.</p>
@@ -51,6 +55,7 @@
 	<div>
 		<h1>“the most fun, innovative bar crawl application I’ve ever seen” - anon.</h1>
 	</div>
+			<% end %>
 
       <footer>
 		<div class="container text-center">
