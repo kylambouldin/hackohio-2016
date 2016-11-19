@@ -2,7 +2,7 @@ class UsersController < ApplicationController
 	
 	# shows homepage
 	def index
-    @client = GooglePlaces::Client.new('AIzaSyD3_RcVWXbbS1P0kq_9fVVYgf5ShL7DC0w')
+    @client = GooglePlaces::Client.new('AIzaSyC6f0pKju1gfOnOCtLXp_8s8JLb2cKC0l8')
     @spots = @client.spots_by_query('bars in columbus Ohio')
 	end
 	
