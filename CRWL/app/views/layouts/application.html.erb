@@ -86,30 +86,6 @@
 </div>
 
 
-<div class="map">
-  <%render partial: "layouts/google_map"%>
-</div>
-
-<h1>Bars near you!</h1>
-<table class="table">
-        <thead>
-          <tr>
-            <td><b>Name</b></td>
-            <td><b>Address</b></td>
-        </thead>
-        <%- @spots.each do |spot| %>
-        <tbody>
-        
-          <tr>
-            <td><%= spot.name %></td>
-            <td><%= spot.formatted_address %></td>
-          </tr>
-        
-        </tbody>
-        <%end%>
-        
-    </table>
-
 
 	<% if !current_page?('/') || user_signed_in? %>
 <footer>
