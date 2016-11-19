@@ -21,3 +21,4 @@
 .byebug_history
 
 /Gemfile.lock
+/CRWL/config/database.yml

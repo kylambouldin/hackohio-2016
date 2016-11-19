@@ -8,6 +8,7 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
+
 		<%= favicon_link_tag %>
 
     <title>CRWL</title>
@@ -47,10 +48,48 @@
 		</p>
 		</div>
 	</div>
-  
+
 	<div>
 		<h1>“the most fun, innovative bar crawl application I’ve ever seen” - anon.</h1>
 	</div>
+
+  <!-- budget -->
+  <div class="jumbotron">
+    <div class="container">
+    <h2>Budget</h2>
+    <script type="text/javascript" src="http://www.chartjs.org/assets/Chart.js"></script>
+    <canvas id="budget" width="600" height="400"></canvas>
+
+    <%= @budget.spent %>
+
+    <script>
+    var colors = ["#878BB6", "#4ACAB4", "#FF8153", "#FFEA88"];
+    var pieData = [
+        {
+            label: "asda",
+            value: 20,
+            color:"#878BB6"
+        },
+        {
+            value : 40,
+            color : "#4ACAB4"
+        },
+        {
+            value : 10,
+            color : "#FF8153"
+        },
+        {
+            value : 30,
+            color : "#FFEA88"
+        }
+    ];
+    // Get the context of the canvas element we want to select
+    var budget= document.getElementById("budget").getContext("2d");
+    new Chart(budget).Pie(pieData);
+    </script>
+
+    </div>
+  </div>
 
       <footer>
 		<div class="container text-center">
@@ -72,6 +111,7 @@
     <script src="js/bootstrap.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../../../assets/js/ie10-viewport-bug-workaround.js"></script>
+
   </body>
 </html>
 <% end %>
