@@ -46,13 +46,31 @@
 
 <%= yield :top_content %>
 
+<h1>Bars near you!</h1>
+<table class="table">
+        <thead>
+          <tr>
+            <td><b>Name</b></td>
+            <td><b>Address</b></td>
+        </thead>
+        <%- @spots.each do |spot| %>
+        <tbody>
+        
+          <tr>
+            <td><%= spot.name %></td>
+            <td><%= spot.formatted_address %></td>
+          </tr>
+        
+        </tbody>
+        <%end%>
+        
+    </table>
+
+
 <div class="container">
     <h1><%= yield :header %></h1>
   <%= yield %>
 </div>
 
-<div class="map">
-  <%render partial: "layouts/google_map"%>
-</div>
 
 </html>
