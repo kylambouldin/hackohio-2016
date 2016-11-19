@@ -1,82 +1,30 @@
 <% content_for :top_content do %>
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="">
-    <meta name="author" content="">
-		<%= favicon_link_tag %>
-
-    <title>CRWL</title>
-
-    <!-- Bootstrap core CSS -->
-		<%= stylesheet_link_tag "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" %>
-
-
-		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-		<%= stylesheet_link_tag "ie10-viewport-bug-workaround.css" %>
-
-
-		<!-- Custom styles for this template -->
-		<%= stylesheet_link_tag "cover" %>
-	<!-- Custom social media buttons -->
-		<%= stylesheet_link_tag "font-awesome.min.css" %>
-
-
-		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-  </head>
-
-  <body>
-		<% if user_signed_in? %>
-			<h1>USER LOGGED IN</h1>
-		<% else %>
-		
-	<div class="loginpic" style=background-image:url('../../../assets/frontpage-tinted.png');>
-	</div>
-
-	<div class="jumbotron">
-		
-		<div class="container">
-		<h1>Welcome!</h1>
-		<p>Register to get started.</p>
-		<p>
-			<%= link_to 'Register', new_user_registration_path, class: 'btn btn-primary btn-lg' %>
-		</p>
+	
+	<% if user_signed_in? %>
+		<h1>USER LOGGED IN</h1>
+	<% else %>
+	
+			<div class="frontpage-banner">
+			<div id="frontpage-banner-background" style="background-image: url('<?php bloginfo('template_directory'); ?>/images/frontpage/hero-image.png');"></div>
+			<div id="frontpage-banner-content">
+				<div id="primary-text-section">
+					<h1><%= link_to 'CRWL', root_path, class:'title-link' %></h1>
+				</div>
+				<div class="button-container" id="banner-button-container">
+					<button><%= link_to 'Register', new_user_registration_path, class: 'btn btn-lg frontpage-btn' %></button>
+					<button><%= link_to 'Log In', new_user_session_path, class: 'btn btn-lg frontpage-btn' %></button>
+				</div>
+			</div>
 		</div>
-	</div>
-  
-	<div>
-		<h1>“the most fun, innovative bar crawl application I’ve ever seen” - anon.</h1>
-	</div>
-			<% end %>
-
-      <footer>
-		<div class="container text-center">
-			<a href="#"><i class="fa fa-facebook"></i></a>
-			<a href="#"><i class="fa fa-twitter"></i></a>
-			<a href="#"><i class="fa fa-linkedin"></i></a>
-			<a href="#"><i class="fa fa-google-plus"></i></a>
-			<a href="#"><i class="fa fa-skype"></i></a>
-		</div><!--End container-->
-        <p class="pull-right"><a href="#">Back to top</a></p>
-        <p>&copy; 2016 CRWL. &middot;</p>
-      </footer>
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="../../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-    <script src="js/bootstrap.min.js"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../../../assets/js/ie10-viewport-bug-workaround.js"></script>
-  </body>
-</html>
+		
+<!-- 
+		<div class="loginpic">
+			<div class="btn-container row">
+				<%= link_to 'Register', new_user_registration_path, class: 'btn btn-lg frontpage-btn' %>
+				<%= link_to 'Log In', new_user_session_path, class: 'btn btn-lg frontpage-btn' %>
+			</div>
+		</div>
+ -->
+	<% end %>
+	
 <% end %>
