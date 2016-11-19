@@ -19,6 +19,7 @@ gem 'devise'
 gem 'bootstrap-sass'
 gem 'pg'
 gem 'jquery-turbolinks'
+gem 'google-api-client'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
