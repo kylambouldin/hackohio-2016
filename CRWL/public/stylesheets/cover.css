@@ -30,9 +30,9 @@ h1 {
 	color: white;
 }
 
-.form {
+.forms {
 	width: 50%;
-	padding: 40px;
+	margin: 0px 0px 0px 30px;
 }
 
 
@@ -46,7 +46,6 @@ h1 {
 }
 
 #frontpage-banner-background {
-	background-image: url('../../../assets/frontpage-notitle.png');
 	background-size: 100% auto;
 	background-position: center;
 	min-width: 100%;
@@ -101,12 +100,13 @@ h1 {
 @media only screen and ( max-width: 1200px )
 {
 	#frontpage-banner-background {
-		height: 720px;
+		height: 800px;
 	}
 	#frontpage-banner-content {
-		height: 720px;
+		height: 800px;
 	}
 }
+
 
 
 
@@ -175,6 +175,8 @@ h1 {
 
 .footer {
     padding: 10px 0;
+	bottom: 0px;
+	left: 0px;
 }
 
 .footer a {
