@@ -1,4 +1,3 @@
-require 'budget.rb'
 
 class UsersController < ApplicationController
 

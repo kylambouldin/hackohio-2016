@@ -10,11 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 20161119223120) do
-=======
 ActiveRecord::Schema.define(version: 20161119233642) do
->>>>>>> refs/remotes/origin/master
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,18 +20,17 @@ ActiveRecord::Schema.define(version: 20161119233642) do
     t.datetime "updated_at", null: false
   end
 
-<<<<<<< HEAD
   create_table "budgets", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-=======
+  end
+
   create_table "crawls", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "name",       null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_crawls_on_user_id", using: :btree
->>>>>>> refs/remotes/origin/master
   end
 
   create_table "users", force: :cascade do |t|

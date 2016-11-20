@@ -1,3 +1,5 @@
+require 'budget.rb'
+
 class CrawlsController < ApplicationController
 
 	def create
@@ -10,17 +12,17 @@ class CrawlsController < ApplicationController
 	    	@numbers = 1;
 	    end
 	end
-	
+
 	def mapdata
 	end
-	
+
 	def show
 	end
 
 	def new
 		@crawl = Crawl.new
 	end
-	
+
 	def index
 	end
 end
