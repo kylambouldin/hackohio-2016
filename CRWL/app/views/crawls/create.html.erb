@@ -1,11 +1,29 @@
 <div class="form">
 <h2>Create New Bar Crawl</h2>
 
-<%= form_for @crawl do |f| %>
-  <%= f.label :num_bars %>:
-  <%= f.text_field :num_bars %><br />
+<div class="map">
+  <%render partial: "layouts/google_map"%>
+</div>
 
-  <%= f.submit %>
-<% end %>
+
+		<h1>Bars near you!</h1>
+		<table class="table">
+						<thead>
+							<tr>
+								<td><b>Name</b></td>
+								<td><b>Address</b></td>
+						</thead>
+						<%- @spots.each do |spot| %>
+						<tbody>
+				
+							<tr>
+								<td><%= spot.name %></td>
+								<td><%= spot.formatted_address %></td>
+							</tr>
+				
+						</tbody>
+						<%end%>
+				
+				</table>
 
 </div>
