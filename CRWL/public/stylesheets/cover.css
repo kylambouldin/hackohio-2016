@@ -46,6 +46,7 @@ h1 {
 }
 
 #frontpage-banner-background {
+	background-image: url('../../../assets/frontpage-notitle.png');
 	background-size: 100% auto;
 	background-position: center;
 	min-width: 100%;

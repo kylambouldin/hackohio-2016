@@ -7,6 +7,10 @@ class CrawlsController < ApplicationController
 	
 	def show
 	end
+
+	def new
+		@crawl = Crawl.new
+	end
 	
 	def index
 	end
