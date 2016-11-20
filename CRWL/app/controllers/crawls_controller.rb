@@ -24,25 +24,22 @@ class CrawlsController < ApplicationController
 	    end
 	end
 
-	def mapdata
-	end
 
 	def show
-	end
-
-	def new
-		@crawl = Crawl.new
+	  @crawl = Crawl.find(params[:id])
 	end
 
 	def index
 	end
 	
 	def save
-		params[:spot_ids].each do |id|
-			puts id
+		puts 'saving'
+		params[:spot_ids].each do |spot|
+			puts spot
 		end
 		
-		@crawl = Crawl.create([{ name: params[:crawl_name], user_id: current_user.id, crawl_date: params[:crawl_date] }])
-		return @crawl
+		@crawl = Crawl.create([{ name: params[:crawl_name], user_id: current_user.id, date: params[:crawl_date] }])
+		flash[:success] = "New crawl created"
+		redirect_to @crawl 
 	end
 end

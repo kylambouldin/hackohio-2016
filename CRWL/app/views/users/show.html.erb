@@ -5,12 +5,31 @@
 	<h1>List of Known Bars</h1>
 	<table class="table">
 		<thead>
-			<tr>
-			<td><b>Name</b></td>
+			<tr><th>Name</th></tr>
 		</thead>
 		<%- @bars.each do |bar| %>
 		<tbody>
 			<tr><td><%= bar.name %></td></tr>
+		</tbody>
+		<%end%>
+	</table>
+<% end %>
+
+<% if @crawls %>
+	<h1>My Crawls</h1>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>date</th>
+			</tr>
+		</thead>
+		<%- @crawls.each do |crawl| %>
+		<tbody>
+			<tr>
+				<td><%= crawl.name %></td>
+				<td><%= crawl.date %></td>
+			</tr>
 		</tbody>
 		<%end%>
 	</table>

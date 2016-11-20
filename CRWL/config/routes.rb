@@ -6,4 +6,7 @@ Rails.application.routes.draw do
 	get  "/crawl/create" => "crawls#create"
 	get  "/crawl/create/:num" => "crawls#create"
 	post "/crawl/save/" => "crawls#save"
+	get "/crawl/:id" => "crawls#show", as: 'crawl'
+
+
 end

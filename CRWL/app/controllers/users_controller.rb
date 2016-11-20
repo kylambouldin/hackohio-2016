@@ -4,6 +4,7 @@ class UsersController < ApplicationController
 
 	# shows homepage
 	def index
+		@crawls = Crawl.limit(10)
 		if current_user
 			@budget = Budget.new()
 
@@ -35,6 +36,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @bars = Bar.limit(5)
+		@crawls = Crawl.where(user_id: current_user.id)
   end
 
   def new

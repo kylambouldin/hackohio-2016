@@ -57,7 +57,7 @@
         var marker = new SimpleMarkerSymbol("solid", 15, null, orangeRed);
         var renderer = new SimpleRenderer(marker);
         csv.setRenderer(renderer);
-        var template = new InfoTemplate("${type}", "${place}");
+        var template = new InfoTemplate("Bar Details", "${place}");
         csv.setInfoTemplate(template);
         map.addLayer(csv);
         
@@ -152,8 +152,8 @@
 		<%= date_field_tag :crawl_date %>
 		<% @spots.each do |spot| %>
 			<div>
-				<%= check_box_tag 'spot_ids[]', spot.reference -%>
-        <span class="bar_name"><%= h spot.name -%></span></br>
+				<%= check_box_tag "spot_ids[#{spot.id}]", spot.id %>
+        <span class="bar_name"><%= spot.name -%></span></br>
         <%= spot.formatted_address %>
       </div>
   	<% end %>

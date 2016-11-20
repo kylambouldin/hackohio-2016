@@ -2,13 +2,10 @@
 	<% if user_signed_in? %>
 		<h1>Welcome!</h1>
 
-    <h2 style="text-align:center;">Current Bar Crawl</h2>
-
     <!-- budget -->
     <div class="row" style="padding:2%;">
     <div class="col-md-5">
       <div class="container">
-      <script type="text/javascript" src="http://www.chartjs.org/assets/Chart.js"></script>
       <canvas id="budget" width="600" height="400"></canvas>
 
       <%= javascript_tag "bars = #{@budget.getBars()};" %>
@@ -61,6 +58,30 @@
       <% end %>
 
     </div>
+    </div>
+    
+    <div class="show-public-crawls">
+			<% if @crawls %>
+				<h1>Public Crawls</h1>
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Date</th>
+							<th>Creator</th>
+						</tr>
+					</thead>
+					<%- @crawls.each do |crawl| %>
+					<tbody>
+						<tr>
+							<td><%= crawl.name %></td>
+							<td><%= crawl.date %></td>
+							<td><%= User.find(crawl.user_id).name %></td>
+						</tr>
+					</tbody>
+					<%end%>
+				</table>
+			<% end %>
     </div>
 
 
