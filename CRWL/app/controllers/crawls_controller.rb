@@ -1,24 +1,26 @@
 require "csv"
+require 'json'
+require 'net/http'
 
 class CrawlsController < ApplicationController
 
 	def create
+
 			@numbers = params[:num_bars]
 			@crawlname = params[:crawl_name]
 			@crawldate = params[:crawl_date]
 			if (@numbers)
-				@client = GooglePlaces::Client.new('AIzaSyAuj_B1qHWIW7hQDYl9UIVLNpR89Qp-D4o')
+				@client = GooglePlaces::Client.new('AIzaSyCTLRYRo2wwmM3umd6pbRXIVugXUnx0wwI')
 				@spots = @client.spots_by_query('bars in columbus Ohio')
 				@spots = @spots.first(@numbers.to_i)
 				
 				# check if bar exists, if it doesn't create a new one
-
-				CSV.open("public/file.csv", "wb") do |csv|
-					csv << ["longitude", "latitude", "place"]
-					@spots.each do |spot|
-						csv << [spot.lng, spot.lat, spot.name]
-					end
+				
+				@locationArray = Array.new()
+				@spots.each do |spot| 
+					@locationArray.push([spot.lng, spot.lat, spot.name])
 				end
+				
 	    else
 	    	@numbers = 1;
 	    end

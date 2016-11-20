@@ -1,3 +1,4 @@
+<%= javascript_tag "locationArray = #{@locationArray};" %>
 <script>
       require([
         "esri/map",
@@ -11,9 +12,11 @@
         "esri/graphic",
         "esri/tasks/RouteTask",
         "esri/tasks/RouteParameters",
-        "esri/tasks/FeatureSet",
-        "esri/symbols/SimpleLineSymbol",
-        "esri/dijit/LocateButton",
+        "esri/tasks/FeatureSet",            
+        "esri/symbols/SimpleLineSymbol", 
+        "esri/dijit/LocateButton",   
+        "esri/dijit/Directions" ,
+        "esri/geometry/Point" ,
 
         "dojo/_base/array",
         "dojo/on",
@@ -23,8 +26,10 @@
 				"dijit/layout/ContentPane",
       ], function(
         Map, CSVLayer, Color, SimpleMarkerSymbol, SimpleRenderer, InfoTemplate, urlUtils, esriConfig,
-         Graphic, RouteTask, RouteParameters, FeatureSet, SimpleLineSymbol, LocateButton, array, on, dom
+         Graphic, RouteTask, RouteParameters, FeatureSet, SimpleLineSymbol, LocateButton,Directions, Point,
+          array, on, dom
       ) {
+      
         var map, csv;
         var routeTask, routeParams, routes = [];
         var stopSymbol, routeSymbol;
@@ -39,99 +44,26 @@
           center: [ -83.0025815, 39.9713071], //longitude and latitude
           zoom: 12
         });
-
-				geoLocate = new LocateButton({
+        
+// 				geoLocate = new LocateButton({
+// 					map: map
+// 				}, "LocateButton");
+// 				geoLocate.scale = 2400;
+// 				geoLocate.locate();
+// 				
+      
+				var directionsWidget = new Directions({
 					map: map
-				}, "LocateButton");
-				geoLocate.scale = 2400;
-				geoLocate.locate();
+				 },"#dir");
+				directionsWidget.startup();
+				
+				for (var i=0; i< locationArray.length; i++) {
+					var loc = locationArray[i];
+					directionsWidget.addStop([loc[0], loc[1]]);
+				}
+				var dir = directionsWidget.getDirections();
+				console.log(dir);
 
-//         var locationLayer = new esri.layers.GraphicsLayer();
-//         var point = new Point(-83.0025815,39.9713071);
-//         var symbol = new SimpleMarkerSymbol().setColor("#1036DE").setSize(20);
-//         var graphic = new Graphic(point, symbol);
-//         locationLayer.add(graphic);
-//
-// 				var infoTemplate = new InfoTemplate();
-//          infoTemplate.setTitle("<b>Saïd Business School</b>");
-//          infoTemplate.setContent("Park End St, Oxford, OX1 1HP <br> <b>Coordinates:</b> 51.753249,  -1.268388");
-//          graphic.setInfoTemplate(infoTemplate);
-//          map.addLayer(locationLayer)  // Makes sure that map is loaded
-
-        csv = new CSVLayer("/file.csv", {});
-        var orangeRed = new Color([238, 69, 0, 0.5]); // hex is #ff4500
-        var marker = new SimpleMarkerSymbol("solid", 15, null, orangeRed);
-        var renderer = new SimpleRenderer(marker);
-        csv.setRenderer(renderer);
-        var template = new InfoTemplate("Bar Details", "${place}");
-        csv.setInfoTemplate(template);
-        map.addLayer(csv);
-
-				routeTask = new RouteTask("https://route.arcgis.com/arcgis/rest/services/World/Route/NAServer/Route_World");
-        routeParams = new RouteParameters();
-        routeParams.stops = new FeatureSet();
-        routeParams.outSpatialReference = {"wkid":102100};
-
-        routeTask.on("solve-complete", showRoute);
-        routeTask.on("error", errorHandler);
-
-        stopSymbol = new SimpleMarkerSymbol().setStyle(SimpleMarkerSymbol.STYLE_CROSS).setSize(15);
-        stopSymbol.outline.setWidth(3);
-				routeSymbol = new SimpleLineSymbol().setColor(new Color([0,0,255,0.5])).setWidth(5);
-
-				/* add all points??
-				routeParams.stops.features.push(
-            map.graphics.add(
-              new esri.Graphic(
-                evt.mapPoint,
-                stopSymbol,
-                { RouteName:dom.byId("routeName").value }
-              )
-            )
-          );
-				*/
-        on(dom.byId("solveRoutesBtn"), "click", solveRoute);
-        on(dom.byId("clearRoutesBtn"), "click", clearRoutes);
-
-
-				//Solves the routes. Any errors will trigger the errorHandler function.
-        function solveRoute() {
-          routeTask.solve(routeParams);
-        }
-
-        //Clears all routes
-        function clearRoutes() {
-          for (var i=routes.length-1; i>=0; i--) {
-            map.graphics.remove(routes.splice(i, 1)[0]);
-          }
-          routes = [];
-        }
-
-        //Draws the resulting routes on the map
-        function showRoute(evt) {
-          clearRoutes();
-
-          array.forEach(evt.result.routeResults, function(routeResult, i) {
-            routes.push(
-              map.graphics.add(
-                routeResult.route.setSymbol(routeSymbols[routeResult.routeName])
-              )
-            );
-          });
-
-          var msgs = ["Server messages:"];
-          array.forEach(evt.result.messages, function(message) {
-            msgs.push(message.type + " : " + message.description);
-          });
-          if (msgs.length > 1) {
-            alert(msgs.join("\n - "));
-          }
-        }
-
-        //Reports any errors that occurred during the solve
-        function errorHandler(err) {
-          alert("An error occured\n" + err.message + "\n");
-        }
       });
     </script>
 
@@ -176,10 +108,7 @@
 </div>
 
 
-
 <div class="claro col-sm-6">
-        <button id="solveRoutesBtn">Solve Routes</button>
-        <button id="clearRoutesBtn">Clear Routes</button>
     <div data-dojo-type="dijit/layout/BorderContainer"
          data-dojo-props="design:'headline', gutters:false"
          style="width:100%;height:100%;">
