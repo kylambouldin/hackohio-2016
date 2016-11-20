@@ -1,16 +1,16 @@
 class Budget
 
   def initialize()
-    @budget = 0             # total budget
+    @budget = 100             # total budget
     @spent = Hash.new       # amount spent at each bar: (bar,amount)
   end
 
   def loadValues(json)
     parsed = JSON.parse(json)
     if (parsed["budget"])
-      @budget = parsed["budget"]
-    else
-      @budget = 100
+      if (parsed["budget"] != 0)
+        @budget = parsed["budget"]
+      end
     end
     if (parsed["spent"])
       @spent = parsed["spent"]
