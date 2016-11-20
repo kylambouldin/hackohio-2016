@@ -3,7 +3,6 @@ class Budget
   def initialize()
     @budget = 0             # total budget
     @spent = Hash.new       # amount spent at each bar: (bar,amount)
-    createTestData()
   end
 
   def getBudget()
@@ -29,7 +28,9 @@ class Budget
   def getRemainingBudget()
     remainingBudget = @budget
     @spent.each do |bar, amount|
-      remainingBudget -= amount
+      if (!remainingBudget.nil?)
+        remainingBudget -= amount
+      end
     end
     remainingBudget
   end
