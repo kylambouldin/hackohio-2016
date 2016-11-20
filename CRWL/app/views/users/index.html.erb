@@ -1,4 +1,5 @@
 <% content_for :top_content do %>
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -122,4 +123,36 @@
 
   </body>
 </html>
+=======
+	
+	<% if user_signed_in? %>
+		<h1>USER LOGGED IN</h1>
+		
+		
+	<% else %>
+	
+			<div class="frontpage-banner">
+			<div id="frontpage-banner-background" style="background-image: url('<?php bloginfo('template_directory'); ?>/images/frontpage/hero-image.png');"></div>
+			<div id="frontpage-banner-content">
+				<div id="primary-text-section">
+					<h1><%= link_to 'CRWL', root_path, class:'title-link' %></h1>
+				</div>
+				<div class="button-container" id="banner-button-container">
+					<button><%= link_to 'Register', new_user_registration_path, class: 'btn btn-lg frontpage-btn' %></button>
+					<button><%= link_to 'Log In', new_user_session_path, class: 'btn btn-lg frontpage-btn' %></button>
+				</div>
+			</div>
+		</div>
+		
+<!-- 
+		<div class="loginpic">
+			<div class="btn-container row">
+				<%= link_to 'Register', new_user_registration_path, class: 'btn btn-lg frontpage-btn' %>
+				<%= link_to 'Log In', new_user_session_path, class: 'btn btn-lg frontpage-btn' %>
+			</div>
+		</div>
+ -->
+	<% end %>
+	
+>>>>>>> refs/remotes/origin/master
 <% end %>
