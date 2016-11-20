@@ -49,19 +49,17 @@
       <h3>Remaining budget: $<%= @budget.getRemainingBudget() %> </h3>
 
       <%= form_tag("/", method: "get") do %>
-        <%= label_tag(:budgetValue, "Enter a new budget:") %>
+        <p><%= label_tag(:budgetValue, "Enter a new budget:") %>
         <%= number_field_tag :budgetValue, value: @budgetValue %>
-        <%= submit_tag("Enter") %>
+        <%= submit_tag("Enter") %></p>
       <% end %>
       <%= form_tag("/", method: "get") do %>
-        <%= label_tag(:bar, "Enter the bar name:") %>
-        <%= text_field_tag :bar %>
-        <%= label_tag(:spent, "Enter the amount spent:") %>
+        <p><%= label_tag(:bar, "Enter the bar name:") %>
+        <%= text_field_tag :bar %></p>
+        <p><%= label_tag(:spent, "Enter the amount spent:") %>
         <%= number_field_tag :spent, value: @spent %>
-        <%= submit_tag("Enter") %>
+        <%= submit_tag("Enter") %></p>
       <% end %>
-
-      <%= @budget.getBars() %>
 
     </div>
     </div>

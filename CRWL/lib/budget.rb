@@ -5,6 +5,22 @@ class Budget
     @spent = Hash.new       # amount spent at each bar: (bar,amount)
   end
 
+  def loadValues(json)
+    parsed = JSON.parse(json)
+    if (parsed["budget"])
+      @budget = parsed["budget"]
+    else
+      @budget = 100
+    end
+    if (parsed["spent"])
+      @spent = parsed["spent"]
+    else
+      @spent = Hash.new
+    end
+    puts @budget
+    puts @spent
+  end
+
   def getBudget()
     @budget
   end
@@ -33,14 +49,6 @@ class Budget
       end
     end
     remainingBudget
-  end
-
-  def createTestData()
-    setBudget(100)
-    setSpentAt("Out R Inn", 25)
-    setSpentAt("barrzzz", 15)
-    setSpentAt("drinks errywhere", 10)
-    setSpentAt("the club", 5)
   end
 
 end
