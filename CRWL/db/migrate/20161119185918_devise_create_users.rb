@@ -31,10 +31,11 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.0]
       t.string   :unlock_token # Only if unlock strategy is :email or :both
       t.datetime :locked_at
 
+      ## budget
+      t.string  :budgetSave
+
       t.timestamps null: false
 
-      ## Budget
-      t.string     :save
     end
 
     add_index :users, :email,                unique: true

@@ -1,7 +1,7 @@
 <%= javascript_tag "locationArray = #{@locationArray};" %>
 <script>
       require([
-        "esri/map", 
+        "esri/map",
         "esri/layers/CSVLayer",
         "esri/Color",
         "esri/symbols/SimpleMarkerSymbol",
@@ -9,8 +9,8 @@
         "esri/InfoTemplate",
         "esri/urlUtils",
         "esri/config",
-        "esri/graphic",            
-        "esri/tasks/RouteTask",            
+        "esri/graphic",
+        "esri/tasks/RouteTask",
         "esri/tasks/RouteParameters",
         "esri/tasks/FeatureSet",            
         "esri/symbols/SimpleLineSymbol", 
@@ -33,16 +33,16 @@
         var map, csv;
         var routeTask, routeParams, routes = [];
         var stopSymbol, routeSymbol;
-        
+
         urlUtils.addProxyRule({
-          urlPrefix: "http://utility.arcgis.com/usrsvcs/appservices/ATj08erm3SUoooDQ/rest/services/World/Route/NAServer/Route_World",  
+          urlPrefix: "http://utility.arcgis.com/usrsvcs/appservices/ATj08erm3SUoooDQ/rest/services/World/Route/NAServer/Route_World",
           proxyUrl: "/sproxy/"
         });
-        
+
         map = new Map("map", {
           basemap: "streets",
           center: [ -83.0025815, 39.9713071], //longitude and latitude
-          zoom: 12 
+          zoom: 12
         });
         
 // 				geoLocate = new LocateButton({
@@ -66,7 +66,7 @@
 				}
 				var dir = directionsWidget.getDirections();
 				console.log(dir);
-    
+
 
         //Draws the resulting routes on the map
         function showRoute(evt) {
@@ -95,7 +95,7 @@
         }
       });
     </script>
-    
+
 
 <div class="row">
 <h2>Create New Bar Crawl</h2>
@@ -118,12 +118,13 @@
 		<%= label_tag(:crawl_date, "Bar Crawl Date:") %>
 		<%= date_field_tag :crawl_date %>
 		<% @spots.each do |spot| %>
-			<div>
+			<div class="show-crawl-list">
 				<%= check_box_tag "spot_ids[#{spot.id}]", spot.id %>
         <span class="bar_name"><%= spot.name -%></span></br>
         <%= spot.formatted_address %>
       </div>
   	<% end %>
+    <br><br>
 	  <%= submit_tag("Save") %>
   <% end %>
 <% end %>
@@ -131,7 +132,7 @@
 </div>
 
 
-	
+
 <div class="claro col-sm-6">
     <div data-dojo-type="dijit/layout/BorderContainer"
          data-dojo-props="design:'headline', gutters:false"
@@ -142,7 +143,7 @@
 
         <div id="dir"></div>
       </div>
-					<div id="LocateButton"></div> 
+					<div id="LocateButton"></div>
       <div id="map"
            data-dojo-type="dijit/layout/ContentPane"
            data-dojo-props="region:'center'">

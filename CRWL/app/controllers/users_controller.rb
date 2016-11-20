@@ -12,14 +12,12 @@ class UsersController < ApplicationController
 			user.budgetSave
 			if (!user.budgetSave.nil?)
 				@budget.loadValues(user.budgetSave)
-			else
-				@budgetValue = 100;
 			end
 
 			@budgetValue = params[:budgetValue]
 			@bar = params[:bar]
 			@spent = params[:spent]
-			if (!@budgetValue.nil?)
+			if (!@budgetValue.nil? && @budgetValue.to_i != 0)
 				@budget.setBudget(@budgetValue.to_i);
 			end
 			if (!@bar.nil? && !@spent.nil?)
