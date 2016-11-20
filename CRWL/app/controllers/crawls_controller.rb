@@ -10,7 +10,7 @@ class CrawlsController < ApplicationController
 			@crawlname = params[:crawl_name]
 			@crawldate = params[:crawl_date]
 			if (@numbers)
-				@client = GooglePlaces::Client.new('AIzaSyCTLRYRo2wwmM3umd6pbRXIVugXUnx0wwI')
+				@client = GooglePlaces::Client.new('AIzaSyAuj_B1qHWIW7hQDYl9UIVLNpR89Qp-D4o')
 				@spots = @client.spots_by_query('bars in columbus Ohio')
 				@spots = @spots.first(@numbers.to_i)
 				
