@@ -1,4 +1,3 @@
-require 'budget.rb'
 require "csv"
 
 class CrawlsController < ApplicationController

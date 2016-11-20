@@ -1,2 +1,2 @@
-class BarController < ApplicationController
+class BarsController < ApplicationController
 end

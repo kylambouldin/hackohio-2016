@@ -34,6 +34,7 @@ class UsersController < ApplicationController
 	# shows individual user profilera
   def show
     @user = User.find(params[:id])
+    @bars = Bar.limit(5)
   end
 
   def new
