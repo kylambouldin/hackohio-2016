@@ -51,10 +51,7 @@
 // 				geoLocate.scale = 2400;
 // 				geoLocate.locate();
 // 				
-        
-        
       
-        console.log("setting up directions widget");
 				var directionsWidget = new Directions({
 					map: map
 				 },"#dir");
@@ -67,32 +64,6 @@
 				var dir = directionsWidget.getDirections();
 				console.log(dir);
 
-
-        //Draws the resulting routes on the map
-        function showRoute(evt) {
-          clearRoutes();
-
-          array.forEach(evt.result.routeResults, function(routeResult, i) {
-            routes.push(
-              map.graphics.add(
-                routeResult.route.setSymbol(routeSymbols[routeResult.routeName])
-              )
-            );
-          });
-
-          var msgs = ["Server messages:"];
-          array.forEach(evt.result.messages, function(message) {
-            msgs.push(message.type + " : " + message.description);
-          });
-          if (msgs.length > 1) {
-            alert(msgs.join("\n - "));
-          }
-        }
-
-        //Reports any errors that occurred during the solve
-        function errorHandler(err) {
-          alert("An error occured\n" + err.message + "\n");
-        }
       });
     </script>
 
@@ -130,7 +101,6 @@
 <% end %>
 
 </div>
-
 
 
 <div class="claro col-sm-6">
