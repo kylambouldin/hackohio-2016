@@ -83,7 +83,8 @@ h2{
 }
 
 
-#banner-button-container {
+#banner-button-
+{
 	position: relative;
 	width: 75%;
 	margin: 0px auto;
@@ -220,5 +221,30 @@ h2{
     text-decoration: none;
 }
 
+.frontpage-btn{
+	color: #555555 !important;
+	background-color: #95f7ff;
+	width: 120px;
+}
 
 
+.frontpage-btn:hover{
+	background-color: #93DAD6;
+}
+
+.button-container button {
+	background: rgba(255, 255, 255, 0);
+	border: none;
+}
+
+.button-container button:focus {
+	outline-width: 0;
+}
+
+.button-container button:hover {
+	cursor: default;
+}
+
+.container{
+	display: inline-block;
+}
