@@ -11,9 +11,9 @@
         "esri/graphic",            
         "esri/tasks/RouteTask",            
         "esri/tasks/RouteParameters",
-
         "esri/tasks/FeatureSet",            
-        "esri/symbols/SimpleLineSymbol",          
+        "esri/symbols/SimpleLineSymbol", 
+        "esri/dijit/LocateButton",         
 
         "dojo/_base/array",
         "dojo/on",
@@ -23,7 +23,7 @@
 				"dijit/layout/ContentPane",
       ], function(
         Map, CSVLayer, Color, SimpleMarkerSymbol, SimpleRenderer, InfoTemplate, urlUtils, esriConfig,
-         Graphic, RouteTask, RouteParameters, FeatureSet, SimpleLineSymbol, array, on, dom
+         Graphic, RouteTask, RouteParameters, FeatureSet, SimpleLineSymbol, LocateButton, array, on, dom
       ) {
         var map, csv;
         var routeTask, routeParams, routes = [];
@@ -39,6 +39,12 @@
           center: [ -83.0025815, 39.9713071], //longitude and latitude
           zoom: 12 
         });
+        
+				geoLocate = new LocateButton({
+					map: map
+				}, "LocateButton");
+				geoLocate.scale = 2400;
+				geoLocate.locate();
         
 //         var locationLayer = new esri.layers.GraphicsLayer();
 //         var point = new Point(-83.0025815,39.9713071);  
@@ -177,6 +183,7 @@
 
         <div id="dir"></div>
       </div>
+					<div id="LocateButton"></div> 
       <div id="map"
            data-dojo-type="dijit/layout/ContentPane"
            data-dojo-props="region:'center'">
