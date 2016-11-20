@@ -25,11 +25,9 @@ ActiveRecord::Schema.define(version: 20161120103352) do
   end
 
   create_table "bars", force: :cascade do |t|
+    t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string   "name"
-    t.float    "longitude"
-    t.float    "latitude"
   end
 
   create_table "crawlers", force: :cascade do |t|
@@ -48,15 +46,6 @@ ActiveRecord::Schema.define(version: 20161120103352) do
     t.datetime "updated_at", null: false
     t.datetime "date"
     t.index ["user_id"], name: "index_crawls_on_user_id", using: :btree
-  end
-
-  create_table "favorite_bar", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "bar_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["bar_id"], name: "index_favorite_bar_on_bar_id", using: :btree
-    t.index ["user_id"], name: "index_favorite_bar_on_user_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -80,7 +69,7 @@ ActiveRecord::Schema.define(version: 20161120103352) do
     t.datetime "locked_at"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
-    t.text     "budgetSave"
+    t.string   "budgetSave"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
@@ -92,6 +81,4 @@ ActiveRecord::Schema.define(version: 20161120103352) do
   add_foreign_key "crawlers", "crawls"
   add_foreign_key "crawlers", "users"
   add_foreign_key "crawls", "users"
-  add_foreign_key "favorite_bar", "bars"
-  add_foreign_key "favorite_bar", "users"
 end
