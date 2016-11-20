@@ -7,6 +7,8 @@ body {
 	position:relative;
 	z-index:0;
 	min-width: 1200px;
+  background-image: url('../../../assets/white_texture.jpg');
+
 }
 
 h1 {
@@ -131,21 +133,23 @@ h2{
 
   .navbar {
       margin-bottom: 0;
-      background-color: #ffffff;
+      margin-top: 0;
+      background-color: #336E7B;
       z-index: 9999;
       border: 0;
       font-size: 14px !important;
-      line-height: 1.42857143 !important;
       letter-spacing: 4px;
       border-radius: 0;
       font-family: Montserrat, sans-serif;
+      text-align: center;
   }
   .navbar li a, .navbar .navbar-brand {
 	  font-size: 20px !important;
+    color: #000;
   }
   .navbar-nav li a:hover, .navbar-nav li.active a {
-      color: #000000 !important;
-      background-color: #fff !important;
+      color: #DADFE1 !important;
+      background-color: #336E7B ;
   }
   .navbar-default .navbar-toggle {
       border-color: transparent;
