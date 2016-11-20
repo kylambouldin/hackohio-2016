@@ -161,6 +161,11 @@
 				<%= check_box_tag "spot_ids[#{spot.id}]", spot.id %>
         <span class="bar_name"><%= spot.name -%></span></br>
         <%= spot.formatted_address %>
+        <%@bar = Bar.new%>
+        <%@bar.address = spot.formatted_address%>
+        <%@bar.name = spot.name%>
+        <%@bar.save%>
+        <%puts "\n\n\n BAR SAVED \n\n\n"%>
       </div>
   	<% end %>
     <br><br>

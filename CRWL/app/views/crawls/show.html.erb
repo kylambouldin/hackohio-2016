@@ -1,3 +1,7 @@
 <h1>Crawl Details</h1>
 <h2><%= @crawl.name %></h2>
 <h3><%= @crawl.date %></h3>
+<%@bars = Bar.all%>
+<%@bars.each do |bar|%>
+<p><%=bar.name%> <p>
+<%end%>

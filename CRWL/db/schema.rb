@@ -28,6 +28,9 @@ ActiveRecord::Schema.define(version: 20161120103352) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "address"
+    t.float    "longitude"
+    t.float    "latitude"
   end
 
   create_table "crawlers", force: :cascade do |t|
@@ -67,9 +70,9 @@ ActiveRecord::Schema.define(version: 20161120103352) do
     t.integer  "failed_attempts",        default: 0,  null: false
     t.string   "unlock_token"
     t.datetime "locked_at"
+    t.string   "budgetSave"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
-    t.string   "budgetSave"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
