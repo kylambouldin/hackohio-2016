@@ -35,6 +35,10 @@ h1 {
 	margin: 0px 0px 0px 30px;
 }
 
+h2{
+	margin: 0px 0px 0px 20px;
+}
+
 
 /* hero image banner */
 #frontpage-banner{
@@ -79,7 +83,8 @@ h1 {
 }
 
 
-#banner-button-container {
+#banner-button-
+{
 	position: relative;
 	width: 75%;
 	margin: 0px auto;
@@ -126,16 +131,15 @@ h1 {
       font-family: Montserrat, sans-serif;
   }
   .navbar li a, .navbar .navbar-brand {
-      color: #000000 !important;
 	  font-size: 20px !important;
   }
   .navbar-nav li a:hover, .navbar-nav li.active a {
-      color: #0000FF !important;
+      color: #000000 !important;
       background-color: #fff !important;
   }
   .navbar-default .navbar-toggle {
       border-color: transparent;
-      color: #fff !important;
+      color: #777 !important;
   }
 
 
@@ -217,5 +221,30 @@ h1 {
     text-decoration: none;
 }
 
+.frontpage-btn{
+	color: #555555 !important;
+	background-color: #95f7ff;
+	width: 120px;
+}
 
 
+.frontpage-btn:hover{
+	background-color: #93DAD6;
+}
+
+.button-container button {
+	background: rgba(255, 255, 255, 0);
+	border: none;
+}
+
+.button-container button:focus {
+	outline-width: 0;
+}
+
+.button-container button:hover {
+	cursor: default;
+}
+
+.container{
+	display: inline-block;
+}

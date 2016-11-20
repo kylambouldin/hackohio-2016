@@ -19,8 +19,6 @@
         "dojo/_base/array",
         "dojo/on",
         "dojo/dom",
-        
-				"esri/tasks/DataLayer",
 
         "dijit/layout/BorderContainer",
         "dijit/layout/ContentPane",
@@ -82,9 +80,6 @@
         stopSymbol.outline.setWidth(3);
 				routeSymbol = new SimpleLineSymbol().setColor(new Color([0,0,255,0.5])).setWidth(5);
 				
-				var stops = new DataLayer();
-				console.log(map);
-			  routeParams.stops = stops;
 				/* add all points??
 				routeParams.stops.features.push(
             map.graphics.add(
