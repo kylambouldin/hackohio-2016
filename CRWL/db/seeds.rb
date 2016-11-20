@@ -3,5 +3,7 @@
 #
 # Examples:
 #
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+user = User.create(email: 'test@test.com', password: 'password', name: 'Test User')
+bar = Bar.create(name: 'Little Bar', longitude: -85, latitude: 38 )
+date = DateTime.new(2017,5,7,4,20,00) # year, month, day, hour, minute, second
+crawl = Crawl.create(name: 'First Crawl', user_id: user.id, date:date)
