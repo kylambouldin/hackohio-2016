@@ -29,6 +29,9 @@
 	<%= stylesheet_link_tag "cover" %>
 <!-- Custom social media buttons -->
 	<%= stylesheet_link_tag "font-awesome.min.css" %>
+	
+		<%= stylesheet_link_tag "home" %>
+
 
 
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -89,18 +92,16 @@
 
 
 	<% if !current_page?('/') || user_signed_in? %>
-<footer>
-	<div class="container text-center">
-		<a href="#"><i class="fa fa-facebook"></i></a>
-		<a href="#"><i class="fa fa-twitter"></i></a>
-		<a href="#"><i class="fa fa-linkedin"></i></a>
-		<a href="#"><i class="fa fa-google-plus"></i></a>
-		<a href="#"><i class="fa fa-skype"></i></a>
-	</div><!--End container-->
-	<p class="pull-right"><a href="#">Back to top</a></p>
-	<p>&copy; 2016 CRWL. &middot;</p>
-</footer>
-<% end %>
+		<footer>
+			<div class="container text-center">
+				<a href = "#"><img src = "/images/socialMediaIcons/twitter.png" class = "smIcon"></a>
+				<a href = "#"><img src = "/images/socialMediaIcons/linkedin.png" class = "smIcon"></a>
+				<a href = "#"><img src = "/images/socialMediaIcons/google-plus.png" class = "smIcon"></a>
+				<a href = "#"><img src = "/images/socialMediaIcons/facebook.png" class = "smIcon"></a>
+				<p> </p>
+				<p>&copy; 2016 CRWL &middot; <a id = "btt" href="#">Back to top</a></p>
+			</div><!--End container-->
+		</footer>
 
 <!-- Bootstrap core JavaScript
 ================================================== -->
