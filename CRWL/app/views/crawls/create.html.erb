@@ -1,6 +1,6 @@
 <script>
       require([
-        "esri/map", 
+        "esri/map",
         "esri/layers/CSVLayer",
         "esri/Color",
         "esri/symbols/SimpleMarkerSymbol",
@@ -8,12 +8,12 @@
         "esri/InfoTemplate",
         "esri/urlUtils",
         "esri/config",
-        "esri/graphic",            
-        "esri/tasks/RouteTask",            
+        "esri/graphic",
+        "esri/tasks/RouteTask",
         "esri/tasks/RouteParameters",
-        "esri/tasks/FeatureSet",            
-        "esri/symbols/SimpleLineSymbol", 
-        "esri/dijit/LocateButton",         
+        "esri/tasks/FeatureSet",
+        "esri/symbols/SimpleLineSymbol",
+        "esri/dijit/LocateButton",
 
         "dojo/_base/array",
         "dojo/on",
@@ -28,36 +28,36 @@
         var map, csv;
         var routeTask, routeParams, routes = [];
         var stopSymbol, routeSymbol;
-        
+
         urlUtils.addProxyRule({
-          urlPrefix: "http://utility.arcgis.com/usrsvcs/appservices/ATj08erm3SUoooDQ/rest/services/World/Route/NAServer/Route_World",  
+          urlPrefix: "http://utility.arcgis.com/usrsvcs/appservices/ATj08erm3SUoooDQ/rest/services/World/Route/NAServer/Route_World",
           proxyUrl: "/sproxy/"
         });
-        
+
         map = new Map("map", {
           basemap: "streets",
           center: [ -83.0025815, 39.9713071], //longitude and latitude
-          zoom: 12 
+          zoom: 12
         });
-        
+
 				geoLocate = new LocateButton({
 					map: map
 				}, "LocateButton");
 				geoLocate.scale = 2400;
 				geoLocate.locate();
-        
+
 //         var locationLayer = new esri.layers.GraphicsLayer();
-//         var point = new Point(-83.0025815,39.9713071);  
-//         var symbol = new SimpleMarkerSymbol().setColor("#1036DE").setSize(20);  
-//         var graphic = new Graphic(point, symbol);  
-//         locationLayer.add(graphic); 
-//         
-// 				var infoTemplate = new InfoTemplate();  
-//          infoTemplate.setTitle("<b>Saïd Business School</b>");  
-//          infoTemplate.setContent("Park End St, Oxford, OX1 1HP <br> <b>Coordinates:</b> 51.753249,  -1.268388");  
-//          graphic.setInfoTemplate(infoTemplate);  
-//          map.addLayer(locationLayer)  // Makes sure that map is loaded  
-        
+//         var point = new Point(-83.0025815,39.9713071);
+//         var symbol = new SimpleMarkerSymbol().setColor("#1036DE").setSize(20);
+//         var graphic = new Graphic(point, symbol);
+//         locationLayer.add(graphic);
+//
+// 				var infoTemplate = new InfoTemplate();
+//          infoTemplate.setTitle("<b>Saïd Business School</b>");
+//          infoTemplate.setContent("Park End St, Oxford, OX1 1HP <br> <b>Coordinates:</b> 51.753249,  -1.268388");
+//          graphic.setInfoTemplate(infoTemplate);
+//          map.addLayer(locationLayer)  // Makes sure that map is loaded
+
         csv = new CSVLayer("/file.csv", {});
         var orangeRed = new Color([238, 69, 0, 0.5]); // hex is #ff4500
         var marker = new SimpleMarkerSymbol("solid", 15, null, orangeRed);
@@ -66,19 +66,19 @@
         var template = new InfoTemplate("Bar Details", "${place}");
         csv.setInfoTemplate(template);
         map.addLayer(csv);
-        
+
 				routeTask = new RouteTask("https://route.arcgis.com/arcgis/rest/services/World/Route/NAServer/Route_World");
         routeParams = new RouteParameters();
         routeParams.stops = new FeatureSet();
         routeParams.outSpatialReference = {"wkid":102100};
-            
+
         routeTask.on("solve-complete", showRoute);
         routeTask.on("error", errorHandler);
-                
+
         stopSymbol = new SimpleMarkerSymbol().setStyle(SimpleMarkerSymbol.STYLE_CROSS).setSize(15);
         stopSymbol.outline.setWidth(3);
 				routeSymbol = new SimpleLineSymbol().setColor(new Color([0,0,255,0.5])).setWidth(5);
-				
+
 				/* add all points??
 				routeParams.stops.features.push(
             map.graphics.add(
@@ -91,9 +91,9 @@
           );
 				*/
         on(dom.byId("solveRoutesBtn"), "click", solveRoute);
-        on(dom.byId("clearRoutesBtn"), "click", clearRoutes);        
-    
-    
+        on(dom.byId("clearRoutesBtn"), "click", clearRoutes);
+
+
 				//Solves the routes. Any errors will trigger the errorHandler function.
         function solveRoute() {
           routeTask.solve(routeParams);
@@ -134,7 +134,7 @@
         }
       });
     </script>
-    
+
 
 <div class="row">
 <h2>Create New Bar Crawl</h2>
@@ -157,12 +157,13 @@
 		<%= label_tag(:crawl_date, "Bar Crawl Date:") %>
 		<%= date_field_tag :crawl_date %>
 		<% @spots.each do |spot| %>
-			<div>
+			<div class="show-crawl-list">
 				<%= check_box_tag "spot_ids[#{spot.id}]", spot.id %>
         <span class="bar_name"><%= spot.name -%></span></br>
         <%= spot.formatted_address %>
       </div>
   	<% end %>
+    <br><br>
 	  <%= submit_tag("Save") %>
   <% end %>
 <% end %>
@@ -170,7 +171,7 @@
 </div>
 
 
-	
+
 <div class="claro col-sm-6">
         <button id="solveRoutesBtn">Solve Routes</button>
         <button id="clearRoutesBtn">Clear Routes</button>
@@ -183,7 +184,7 @@
 
         <div id="dir"></div>
       </div>
-					<div id="LocateButton"></div> 
+					<div id="LocateButton"></div>
       <div id="map"
            data-dojo-type="dijit/layout/ContentPane"
            data-dojo-props="region:'center'">
