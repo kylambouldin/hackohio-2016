@@ -83,7 +83,8 @@ h2{
 }
 
 
-#banner-button-container {
+#banner-button-
+{
 	position: relative;
 	width: 75%;
 	margin: 0px auto;
@@ -244,3 +245,6 @@ h2{
 	cursor: default;
 }
 
+.container{
+	display: inline-block;
+}
