@@ -1,4 +1,4 @@
 class Crawl < ApplicationRecord
-	has_many :bar
+	has_many :bars
 	belongs_to :user
 end
