@@ -1,2 +1,17 @@
 <h1>User Profile</h1>
 <p>User email: <%= @user.email %></p>
+
+<% if @bars %>
+	<h1>List of Known Bars</h1>
+	<table class="table">
+		<thead>
+			<tr>
+			<td><b>Name</b></td>
+		</thead>
+		<%- @bars.each do |bar| %>
+		<tbody>
+			<tr><td><%= bar.name %></td></tr>
+		</tbody>
+		<%end%>
+	</table>
+<% end %>
