@@ -1,3 +1,147 @@
+<script>
+      require([
+        "esri/map", 
+        "esri/layers/CSVLayer",
+        "esri/Color",
+        "esri/symbols/SimpleMarkerSymbol",
+        "esri/renderers/SimpleRenderer",
+        "esri/InfoTemplate",
+        "esri/urlUtils",
+        "esri/config",
+        "esri/graphic",            
+        "esri/tasks/RouteTask",            
+        "esri/tasks/RouteParameters",
+
+        "esri/tasks/FeatureSet",            
+        "esri/symbols/SimpleMarkerSymbol",
+        "esri/symbols/SimpleLineSymbol",          
+
+        "dojo/_base/array",
+        "dojo/on",
+        "dojo/dom",
+        
+				"esri/tasks/DataLayer",
+
+        "dijit/layout/BorderContainer",
+        "dijit/layout/ContentPane",
+        "dijit/form/HorizontalSlider",
+        "dijit/form/HorizontalRuleLabels",
+				
+        "dojo/domReady!",
+				"dijit/layout/BorderContainer",
+				"dijit/layout/ContentPane",
+      ], function(
+        Map, CSVLayer, Color, SimpleMarkerSymbol, SimpleRenderer, InfoTemplate, urlUtils, esriConfig,
+         Graphic, RouteTask, RouteParameters, FeatureSet, SimpleMarkerSymbol, SimpleLineSymbol, array, on, dom
+      ) {
+        var map, csv;
+        var routeTask, routeParams, routes = [];
+        var stopSymbol, routeSymbol;
+        
+        urlUtils.addProxyRule({
+          urlPrefix: "http://utility.arcgis.com/usrsvcs/appservices/ATj08erm3SUoooDQ/rest/services/World/Route/NAServer/Route_World",  
+          proxyUrl: "/sproxy/"
+        });
+        
+        map = new Map("map", {
+          basemap: "streets",
+          center: [ -83.0025815, 39.9713071], //longitude and latitude
+          zoom: 12 
+        });
+        
+//         var locationLayer = new esri.layers.GraphicsLayer();
+//         var point = new Point(-83.0025815,39.9713071);  
+//         var symbol = new SimpleMarkerSymbol().setColor("#1036DE").setSize(20);  
+//         var graphic = new Graphic(point, symbol);  
+//         locationLayer.add(graphic); 
+//         
+// 				var infoTemplate = new InfoTemplate();  
+//          infoTemplate.setTitle("<b>Saïd Business School</b>");  
+//          infoTemplate.setContent("Park End St, Oxford, OX1 1HP <br> <b>Coordinates:</b> 51.753249,  -1.268388");  
+//          graphic.setInfoTemplate(infoTemplate);  
+//          map.addLayer(locationLayer)  // Makes sure that map is loaded  
+        
+        csv = new CSVLayer("/file.csv", {});
+        var orangeRed = new Color([238, 69, 0, 0.5]); // hex is #ff4500
+        var marker = new SimpleMarkerSymbol("solid", 15, null, orangeRed);
+        var renderer = new SimpleRenderer(marker);
+        csv.setRenderer(renderer);
+        var template = new InfoTemplate("${type}", "${place}");
+        csv.setInfoTemplate(template);
+        map.addLayer(csv);
+        
+				routeTask = new RouteTask("https://route.arcgis.com/arcgis/rest/services/World/Route/NAServer/Route_World");
+        routeParams = new RouteParameters();
+        routeParams.stops = new FeatureSet();
+        routeParams.outSpatialReference = {"wkid":102100};
+            
+        routeTask.on("solve-complete", showRoute);
+        routeTask.on("error", errorHandler);
+                
+        stopSymbol = new SimpleMarkerSymbol().setStyle(SimpleMarkerSymbol.STYLE_CROSS).setSize(15);
+        stopSymbol.outline.setWidth(3);
+				routeSymbol = new SimpleLineSymbol().setColor(new Color([0,0,255,0.5])).setWidth(5);
+				
+				var stops = new DataLayer();
+				console.log(map);
+			  routeParams.stops = stops;
+				/* add all points??
+				routeParams.stops.features.push(
+            map.graphics.add(
+              new esri.Graphic(
+                evt.mapPoint,
+                stopSymbol,
+                { RouteName:dom.byId("routeName").value }
+              )
+            )
+          );
+				*/
+        on(dom.byId("solveRoutesBtn"), "click", solveRoute);
+        on(dom.byId("clearRoutesBtn"), "click", clearRoutes);        
+    
+    
+				//Solves the routes. Any errors will trigger the errorHandler function.
+        function solveRoute() {
+          routeTask.solve(routeParams);
+        }
+
+        //Clears all routes
+        function clearRoutes() {
+          for (var i=routes.length-1; i>=0; i--) {
+            map.graphics.remove(routes.splice(i, 1)[0]);
+          }
+          routes = [];
+        }
+
+        //Draws the resulting routes on the map
+        function showRoute(evt) {
+          clearRoutes();
+
+          array.forEach(evt.result.routeResults, function(routeResult, i) {
+            routes.push(
+              map.graphics.add(
+                routeResult.route.setSymbol(routeSymbols[routeResult.routeName])
+              )
+            );
+          });
+
+          var msgs = ["Server messages:"];
+          array.forEach(evt.result.messages, function(message) {
+            msgs.push(message.type + " : " + message.description);
+          });
+          if (msgs.length > 1) {
+            alert(msgs.join("\n - "));
+          }
+        }
+
+        //Reports any errors that occurred during the solve
+        function errorHandler(err) {
+          alert("An error occured\n" + err.message + "\n");
+        }
+      });
+    </script>
+    
+
 <div class="form">
 <h2>Create New Bar Crawl</h2>
 
@@ -32,4 +176,23 @@
 
 				</table>
 				<% end %>
+				
+<body class="claro">
+        <button id="solveRoutesBtn">Solve Routes</button>
+        <button id="clearRoutesBtn">Clear Routes</button>
+    <div data-dojo-type="dijit/layout/BorderContainer"
+         data-dojo-props="design:'headline', gutters:false"
+         style="width:100%;height:100%;">
+      <div data-dojo-type="dijit/layout/ContentPane"
+           data-dojo-props="region:'right'"
+           style="width:250px;">
+
+        <div id="dir"></div>
+      </div>
+      <div id="map"
+           data-dojo-type="dijit/layout/ContentPane"
+           data-dojo-props="region:'center'">
+      </div>
+    </div>
+  </body>
 </div>
