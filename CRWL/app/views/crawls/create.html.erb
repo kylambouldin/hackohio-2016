@@ -13,24 +13,17 @@
         "esri/tasks/RouteParameters",
 
         "esri/tasks/FeatureSet",            
-        "esri/symbols/SimpleMarkerSymbol",
         "esri/symbols/SimpleLineSymbol",          
 
         "dojo/_base/array",
         "dojo/on",
         "dojo/dom",
-
-        "dijit/layout/BorderContainer",
-        "dijit/layout/ContentPane",
-        "dijit/form/HorizontalSlider",
-        "dijit/form/HorizontalRuleLabels",
-				
         "dojo/domReady!",
 				"dijit/layout/BorderContainer",
 				"dijit/layout/ContentPane",
       ], function(
         Map, CSVLayer, Color, SimpleMarkerSymbol, SimpleRenderer, InfoTemplate, urlUtils, esriConfig,
-         Graphic, RouteTask, RouteParameters, FeatureSet, SimpleMarkerSymbol, SimpleLineSymbol, array, on, dom
+         Graphic, RouteTask, RouteParameters, FeatureSet, SimpleLineSymbol, array, on, dom
       ) {
         var map, csv;
         var routeTask, routeParams, routes = [];
@@ -137,42 +130,42 @@
     </script>
     
 
-<div class="form">
+<div class="row">
 <h2>Create New Bar Crawl</h2>
 
+<div class="col-sm-6">
+
 <%= form_tag("/crawl/create/", method: "get") do %>
+	<h1>Search for bars</h1>
   <%= label_tag(:num_bars, "Number bars:") %>
 	<%= number_field_tag :num_bars, nil, min: 1, value: @numbers %>
   <%= submit_tag("Search") %>
 <% end %>
 
-<div class="map">
-  <%render partial: "layouts/google_map"%>
+<%= form_tag("/crawl/save/", method: "post") do %>
+	<% if @spots %>
+		<h1>Bars near you!</h1>
+		<%= label_tag(:crawl_name, "Bar Crawl Name:") %>
+		<%= text_field_tag :crawl_name, nil, value: @crawlname %>
+		</br>
+		<%= label_tag(:crawl_date, "Bar Crawl Date:") %>
+		<%= date_field_tag :crawl_date %>
+		<% @spots.each do |spot| %>
+			<div>
+				<%= check_box_tag 'spot_ids[]', spot.reference -%>
+        <span class="bar_name"><%= h spot.name -%></span></br>
+        <%= spot.formatted_address %>
+      </div>
+  	<% end %>
+	  <%= submit_tag("Save") %>
+  <% end %>
+<% end %>
+
 </div>
 
-		<% if @spots %>
-		<h1>Bars near you!</h1>
-		<table class="table">
-						<thead>
-							<tr>
-								<td><b>Name</b></td>
-								<td><b>Address</b></td>
-						</thead>
-						<%- @spots.each do |spot| %>
-						<tbody>
 
-							<tr>
-								<td><%= spot.name %></td>
-								<td><%= spot.formatted_address %></td>
-							</tr>
-
-						</tbody>
-						<%end%>
-
-				</table>
-				<% end %>
-				
-<body class="claro">
+	
+<div class="claro col-sm-6">
         <button id="solveRoutesBtn">Solve Routes</button>
         <button id="clearRoutesBtn">Clear Routes</button>
     <div data-dojo-type="dijit/layout/BorderContainer"
@@ -189,5 +182,5 @@
            data-dojo-props="region:'center'">
       </div>
     </div>
-  </body>
+  </div>
 </div>

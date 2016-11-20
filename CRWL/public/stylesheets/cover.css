@@ -30,13 +30,19 @@ h1 {
 	color: white;
 }
 
-.forms {
-	width: 50%;
-	margin: 0px 0px 0px 30px;
+.content {
+	padding: 50px 70px;
 }
 
+.form {
+	width: 50%;
+	margin: 0px auto;
+}
+
+
 h2{
-	margin: 0px 0px 0px 20px;
+	text-align: center;
+	padding-bottom: 20px;
 }
 
 
@@ -113,6 +119,10 @@ h2{
 	}
 }
 
+/* create new crawl form */
+.bar_name {
+	font-size: 1.5em;
+}
 
 
 

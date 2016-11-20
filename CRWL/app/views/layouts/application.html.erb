@@ -43,7 +43,7 @@
 </head>
 
 
-<div class="container">
+<div class="wrapper">
 <% flash.each do |key, value| %>
 	<div class="alert alert-<%= key %>">
 		<%= value %>
@@ -85,7 +85,7 @@
 <%= yield :top_content %>
 
 
-<div class="forms">
+<div class="content">
 	<%= yield %>
 </div>
 
@@ -98,7 +98,7 @@
 				<a href = "#"><img src = "/images/socialMediaIcons/google-plus.png" class = "smIcon"></a>
 				<a href = "#"><img src = "/images/socialMediaIcons/facebook.png" class = "smIcon"></a>
 				<p> </p>
-				<p>&copy; 2016 CRWL &middot;></p>
+				<p>&copy; 2016 CRWL &middot;</p>
 			</div><!--End container-->
 		</footer>
 		<%end%>
