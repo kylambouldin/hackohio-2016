@@ -12,7 +12,7 @@
 
       <script>
       var remainingBudget = "<%= @budget.getRemainingBudget() %>";
-      var colors = ["#878BB6", "#D24D57","#FF8153", "#FFEA88", "#F64747"];
+      var colors = ["#D24D57","#FF8153", "#FFEA88", "#F64747"];
       var pieData = [
         {
             label: "Remaining Budget",
@@ -56,7 +56,7 @@
     </div>
     </div>
 
-    <div class="show-public-crawls-home">
+    <div class="show-public-crawls">
 			<% if @crawls %>
 				<h1>Public Crawls</h1>
 				<table class="table">
