@@ -3,5 +3,6 @@ Rails.application.routes.draw do
   root to: 'users#index'
   resources :users
 
-	get  "/crawl/create" => "crawls#create", as: "create"
+	get  "/crawl/create" => "crawls#create"
+	get  "/crawl/create/:num" => "crawls#create"
 end

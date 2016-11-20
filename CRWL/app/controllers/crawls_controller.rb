@@ -1,8 +1,17 @@
 class CrawlsController < ApplicationController
 
 	def create
-	    @client = GooglePlaces::Client.new('AIzaSyCTLRYRo2wwmM3umd6pbRXIVugXUnx0wwI')
-	    @spots = @client.spots_by_query('bars in columbus Ohio')
+			@numbers = params[:num_bars]
+			if (@numbers)
+				@client = GooglePlaces::Client.new('AIzaSyCTLRYRo2wwmM3umd6pbRXIVugXUnx0wwI')
+				@spots = @client.spots_by_query('bars in columbus Ohio')
+				@spots = @spots.first(@numbers.to_i )
+	    else
+	    	@numbers = 1;
+	    end
+	end
+	
+	def mapdata
 	end
 	
 	def show
