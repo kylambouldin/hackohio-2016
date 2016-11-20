@@ -38,12 +38,12 @@
 		<% if user_signed_in? %>
 			<h1>USER LOGGED IN</h1>
 		<% else %>
-		
+
 	<div class="loginpic" style=background-image:url('../../../assets/frontpage-tinted.png');>
 	</div>
 
 	<div class="jumbotron">
-		
+
 		<div class="container">
 		<h1>Welcome!</h1>
 		<p>Register to get started.</p>
@@ -65,29 +65,32 @@
     <script type="text/javascript" src="http://www.chartjs.org/assets/Chart.js"></script>
     <canvas id="budget" width="600" height="400"></canvas>
 
-    <%= @budget.spent %>
+    <%= javascript_tag "bars = #{@budget.getBars()};" %>
 
     <script>
-    var colors = ["#878BB6", "#4ACAB4", "#FF8153", "#FFEA88"];
+    var remainingBudget = "<%= @budget.getRemainingBudget() %>";
+    var colors = ["#878BB6", "#D24D57","#FF8153", "#FFEA88", "#F64747"];
     var pieData = [
-        {
-            label: "asda",
-            value: 20,
-            color:"#878BB6"
-        },
-        {
-            value : 40,
-            color : "#4ACAB4"
-        },
-        {
-            value : 10,
-            color : "#FF8153"
-        },
-        {
-            value : 30,
-            color : "#FFEA88"
-        }
+      {
+          label: "Remaining Budget",
+          value: remainingBudget,
+          color:"#878BB6"
+      }
     ];
+
+    color_index = 1;
+    i = 2;
+    for (var bar in bars) {
+      var obj = {
+        label:  bar,
+        value:  bars[bar],
+        color:  colors[color_index]
+      };
+      pieData.push(obj);
+      color_index = i % colors.length;
+      i++;
+    }
+
     // Get the context of the canvas element we want to select
     var budget= document.getElementById("budget").getContext("2d");
     new Chart(budget).Pie(pieData);
