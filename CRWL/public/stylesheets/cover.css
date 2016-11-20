@@ -200,4 +200,22 @@ h1 {
     transition: all .5s ease;
 }
 
+.smIcon{
+    display: inline-block;
+    height: 35px;
+    width: 35px;
+    margin: 0px 5px 0px 0px;
+}
+
+.smIcon:hover{
+    background-color: #eeeeee;
+    border-radius: 3px;
+}
+
+#btt{
+    margin-top: 5px;
+    text-decoration: none;
+}
+
+
 
